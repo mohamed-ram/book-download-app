@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{ block.super }} {{ book }}
+{% endblock %}
+
+{% block content %}
+    <div class="row mt-5">
+      <div class="col-sm-6 mx-auto">
+        <div class="card">
+          <img src="{{ book.img.url }}" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">{{ book.name }}</h5>
+            <p class="card-text">author: {{ book.author }}</p>
+            <p class="card-text">price: {{ book.price }}</p>
+            <p class="card-text">category: {{ book.category }}</p>
+            <p class="card-text">rate: {{ book.rate }}</p>
+            <a href="{{ book.file.url}}" download class="btn btn-success">Download</a>
+            <a href="{% url 'book:book_edit' book.slug %}"  class="btn btn-success">Edit</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+{% endblock %}

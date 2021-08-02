@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{ block.super }} Book list
+{% endblock %}
+
+{% block content %}
+  {% if request.GET.q %}
+    <h1 class="display-1">searching for: <b class="text-success">{{ request.GET.q }}</b></h1>
+  {% else %}
+    <h1 class="display-1">All Books!</h1>
+  {% endif %}
+    <div class="row">
+      {% for book in books %}
+      <div class="col-sm-4">
+        <div class="card">
+          {% if book.img %}
+            <img src="{{ book.img.url }}" class="card-img-top" alt="...">
+          {% endif %}
+          <div class="card-body">
+            <h5 class="card-title">{{ book.name }}</h5>
+            <p class="card-text">author: {{ book.author }}</p>
+            {% if book.file %}
+              <a href="{{ book.file.url}}" download class="btn btn-success">Download</a>
+            {% endif %}
+            <a href="{% url 'book:book_detail' book.slug %}"  class="btn btn-warning">read more.</a>
+            <a href="{% url 'book:book_delete' book.pk %}"  class="btn btn-danger">Delete</a>
+          </div>
+        </div>
+      </div>
+  {% endfor %}
+    </div>
+
+
+{% endblock %}
